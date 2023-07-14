@@ -9,12 +9,12 @@ exports.registerUser = async (req, res) => {
     try {
         // Check if the user already exists
         const existingUser = await UserModel.findOne({ username });
-        if (!existingUser) {
+        if (existingUser) {
             return res.status(400).json({ message: 'Username already exists' });
         }
 
         // Hash the password
-        const hashedPassword = await bcrypt.hash(password, 10); //bycrypt algoritma yang digunakan untuk mengamankan penyimpanan dan verifikasi kata sandi (password) dalam sistem komputer. 
+        const hashedPassword = await bcrypt.hash(password, 10);
 
         // Create the user
         const newUser = new UserModel({
@@ -31,7 +31,6 @@ exports.registerUser = async (req, res) => {
 
 // User login
 exports.loginUser = async (req, res) => {
-    
     const { username, password } = req.body;
 
     try {
@@ -49,7 +48,7 @@ exports.loginUser = async (req, res) => {
 
         // Generate JWT token
         const token = jwt.sign({ userId: user._id }, "septian", {
-            expiresIn: '5h', // Set token expiration time
+            expiresIn: '5h',
         });
 
         res.json({ token });
@@ -58,8 +57,26 @@ exports.loginUser = async (req, res) => {
     }
 };
 
-
 // Token verification
 exports.checkTokenValidity = (req, res) => {
-    res.json({ valid: true });
+    // Verifikasi token di sini dan sesuaikan respons berdasarkan hasil verifikasi
+    // Contoh verifikasi token menggunakan jwt.verify()
+    const token = req.headers.authorization;
+
+    if (!token) {
+        return res.status(401).json({ message: 'No token provided' });
+    }
+
+    jwt.verify(token, "septian", (err, decodedToken) => {
+        if (err) {
+            return res.status(401).json({ message: 'Invalid token' });
+        }
+
+        // Token valid, dapatkan data pengguna dari decodedToken
+        const userId = decodedToken.userId;
+
+        // Lakukan logika verifikasi token dan sesuaikan respons berdasarkan hasil verifikasi
+
+        res.json({ valid: true });
+    });
 };
