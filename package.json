@@ -1,0 +1,19 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "buat nyambungin",
+  "main": "app.js",
+  "scripts": {
+    "start": "npx nodemon ./mongodb.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "jsonwebtoken": "^9.0.1",
+    "mongoose": "^6.2.2",
+    "winston": "^3.10.0"
+  }
+}
