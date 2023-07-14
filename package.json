@@ -2,9 +2,9 @@
   "name": "api",
   "version": "1.0.0",
   "description": "buat nyambungin",
-  "main": "mongodb.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node mongodb.js"
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",

@@ -3,8 +3,8 @@ const express = require('express');
 const app = express();
 const PORT = 6001;
 const mongoose = require('mongoose');
-const userroute = require('../Express/router/userrouter');
-const pasienroute = require('../Express/router/pasienrouter');
+const userroute = require('./router/userrouter');
+const pasienroute = require('./router/pasienrouter');
 const cors = require('cors')
 
 app.use(cors({origin:"*"}))
